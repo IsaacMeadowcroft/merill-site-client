@@ -9,3 +9,7 @@ export type TShopItem = {
 export interface IShopItems {
   shopItems: TShopItem[] | undefined;
 }
+
+export interface IShopItem {
+  shopItem: TShopItem;
+}

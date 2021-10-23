@@ -6,7 +6,7 @@ import { Inventory } from "./components/index";
 import { TShopItem } from "./components/interfaces";
 
 const getProducts = async (): Promise<TShopItem[]> =>
-  await (await fetch("http://127.0.0.1:8080/getShoppingItems")).json();
+  await (await fetch("http://127.0.0.1:8080/getShopItems")).json();
 
 export const App: FC = () => {
   const { data, isLoading, error } = useQuery<TShopItem[]>(
