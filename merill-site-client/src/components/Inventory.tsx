@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IShopItems, TShopItem } from "./interfaces";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -62,12 +62,28 @@ export const Inventory: FC<IShopItems> = (props) => {
         },
       ]);
     }
-    setNewID(0);
+    setNewID(newID + 1);
     setNewImage("");
     setNewTitle("");
     setNewPrice(0);
     setNewDescription("");
   };
+
+  const removeShopItem = (shopItem: TShopItem) => {
+    const newShopItems = shopItems.filter((item) => item !== shopItem);
+    setShopItems(newShopItems);
+  };
+
+  useEffect(() => {
+    setNewID(
+      Math.max.apply(
+        Math,
+        shopItems?.map(function (o) {
+          return o.id;
+        })
+      ) + 1
+    );
+  }, [shopItems.length]);
 
   return (
     <>
@@ -87,7 +103,10 @@ export const Inventory: FC<IShopItems> = (props) => {
           ?.sort((a, b) => a.id - b.id)
           .map((shopItem: TShopItem) => (
             <div key={shopItem.id}>
-              <InventoryItem shopItem={shopItem} />
+              <InventoryItem
+                shopItem={shopItem}
+                removeShopItem={removeShopItem}
+              />
             </div>
           ))}
       </Container>

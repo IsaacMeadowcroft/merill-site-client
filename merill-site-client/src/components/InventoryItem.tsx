@@ -14,7 +14,6 @@ import {
 
 export const InventoryItem: FC<IShopItem> = (props) => {
   const [show, setShow] = useState(false);
-  const [visibility, setVisibility] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [newID, setNewID] = useState(props.shopItem.id);
@@ -58,125 +57,117 @@ export const InventoryItem: FC<IShopItem> = (props) => {
 
   return (
     <>
-      {visibility ? (
-        <>
-          <Card style={{ maxWidth: "100vw", marginTop: "3vh" }}>
-            <Card.Body>
-              <Row>
-                <Col sm={2}>
-                  <Image src={newImage} style={{ maxWidth: "12vw" }} />
-                </Col>
-                <Col sm={10}>
-                  <ListGroup variant="flush">
-                    <ListGroup.Item>ID: {newID}</ListGroup.Item>
-                    <ListGroup.Item>
-                      Description: {newDescription}
-                    </ListGroup.Item>
-                    <ListGroup.Item>Price: {newPrice}</ListGroup.Item>
-                    <ListGroup.Item>Title: {newTitle}</ListGroup.Item>
-                    <ListGroup.Item>ImageURL: {newImage}</ListGroup.Item>
-                  </ListGroup>
-                </Col>
-              </Row>
-            </Card.Body>
-            <Card.Footer>
-              <Row>
-                <Col>
-                  <Button
-                    variant="dark"
-                    style={{ width: "100%" }}
-                    onClick={() => {
-                      sendDeleteRequest();
-                      setVisibility(false);
-                    }}
-                  >
-                    Delete Item
-                  </Button>
-                </Col>
-                <Col>
-                  <Button
-                    variant="dark"
-                    style={{ width: "100%" }}
-                    onClick={handleShow}
-                  >
-                    Edit Item
-                  </Button>
-                </Col>
-              </Row>
-            </Card.Footer>
-          </Card>
-
-          <Modal show={show} onHide={handleClose} size="lg">
-            <Modal.Header closeButton>
-              <Modal.Title>Edit item</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <Row>
-                <Col>
-                  <Image src={newImage} style={{ maxWidth: "100%" }} />
-                </Col>
-                <Col>
-                  <Form>
-                    <Form.Group className="mb-3">
-                      <Form.Label>ID</Form.Label>
-                      <Form.Control
-                        type="text"
-                        defaultValue={newID}
-                        onChange={(e) => setNewID(Number(e.target.value))}
-                      ></Form.Control>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Description</Form.Label>
-                      <Form.Control
-                        type="text"
-                        defaultValue={newDescription}
-                        onChange={(e) => setNewDescription(e.target.value)}
-                      ></Form.Control>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Price</Form.Label>
-                      <Form.Control
-                        type="text"
-                        defaultValue={newPrice}
-                        onChange={(e) => setNewPrice(Number(e.target.value))}
-                      ></Form.Control>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Title</Form.Label>
-                      <Form.Control
-                        type="text"
-                        defaultValue={newTitle}
-                        onChange={(e) => setNewTitle(e.target.value)}
-                      ></Form.Control>
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Image URL</Form.Label>
-                      <Form.Control
-                        type="text"
-                        defaultValue={newImage}
-                        onChange={(e) => setNewImage(e.target.value)}
-                      ></Form.Control>
-                    </Form.Group>
-                  </Form>
-                </Col>
-              </Row>
-            </Modal.Body>
-            <Modal.Footer>
+      <Card style={{ maxWidth: "100vw", marginTop: "3vh" }}>
+        <Card.Body>
+          <Row>
+            <Col sm={2}>
+              <Image src={newImage} style={{ maxWidth: "12vw" }} />
+            </Col>
+            <Col sm={10}>
+              <ListGroup variant="flush">
+                <ListGroup.Item>ID: {newID}</ListGroup.Item>
+                <ListGroup.Item>Description: {newDescription}</ListGroup.Item>
+                <ListGroup.Item>Price: {newPrice}</ListGroup.Item>
+                <ListGroup.Item>Title: {newTitle}</ListGroup.Item>
+                <ListGroup.Item>ImageURL: {newImage}</ListGroup.Item>
+              </ListGroup>
+            </Col>
+          </Row>
+        </Card.Body>
+        <Card.Footer>
+          <Row>
+            <Col>
               <Button
-                variant="primary"
+                variant="dark"
+                style={{ width: "100%" }}
                 onClick={() => {
-                  sendUpdateRequest();
-                  handleClose();
+                  sendDeleteRequest();
+                  props.removeShopItem(props.shopItem);
                 }}
               >
-                Save Changes
+                Delete Item
               </Button>
-            </Modal.Footer>
-          </Modal>
-        </>
-      ) : (
-        <></>
-      )}{" "}
+            </Col>
+            <Col>
+              <Button
+                variant="dark"
+                style={{ width: "100%" }}
+                onClick={handleShow}
+              >
+                Edit Item
+              </Button>
+            </Col>
+          </Row>
+        </Card.Footer>
+      </Card>
+
+      <Modal show={show} onHide={handleClose} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Edit item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Row>
+            <Col>
+              <Image src={newImage} style={{ maxWidth: "100%" }} />
+            </Col>
+            <Col>
+              <Form>
+                <Form.Group className="mb-3">
+                  <Form.Label>ID</Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={newID}
+                    onChange={(e) => setNewID(Number(e.target.value))}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={newDescription}
+                    onChange={(e) => setNewDescription(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Price</Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={newPrice}
+                    onChange={(e) => setNewPrice(Number(e.target.value))}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Title</Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={newTitle}
+                    onChange={(e) => setNewTitle(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Image URL</Form.Label>
+                  <Form.Control
+                    type="text"
+                    defaultValue={newImage}
+                    onChange={(e) => setNewImage(e.target.value)}
+                  ></Form.Control>
+                </Form.Group>
+              </Form>
+            </Col>
+          </Row>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            onClick={() => {
+              sendUpdateRequest();
+              handleClose();
+            }}
+          >
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

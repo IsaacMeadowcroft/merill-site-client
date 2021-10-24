@@ -12,4 +12,5 @@ export interface IShopItems {
 
 export interface IShopItem {
   shopItem: TShopItem;
+  removeShopItem: (shopItem: TShopItem) => void;
 }
