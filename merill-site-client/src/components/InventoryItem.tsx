@@ -16,11 +16,13 @@ export const InventoryItem: FC<IShopItem> = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const newID = 0;
-  const newImage = "";
-  const newTitle = "";
-  const newPrice = 0;
-  const newDescription = "";
+  const [newID, setNewID] = useState(props.shopItem.id);
+  const [newImage, setNewImage] = useState(props.shopItem.image);
+  const [newTitle, setNewTitle] = useState(props.shopItem.title);
+  const [newPrice, setNewPrice] = useState(props.shopItem.price);
+  const [newDescription, setNewDescription] = useState(
+    props.shopItem.description
+  );
 
   const sendDeleteRequest = async () => {
     const res = await fetch("http://127.0.0.1:8080/deleteShopItem", {
@@ -116,6 +118,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Control
                     type="text"
                     defaultValue={props.shopItem.id}
+                    onChange={(e) => setNewID(Number(e.target.value))}
                   ></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -123,6 +126,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Control
                     type="text"
                     defaultValue={props.shopItem.description}
+                    onChange={(e) => setNewDescription(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -130,6 +134,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Control
                     type="text"
                     defaultValue={props.shopItem.price}
+                    onChange={(e) => setNewPrice(Number(e.target.value))}
                   ></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -137,6 +142,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Control
                     type="text"
                     defaultValue={props.shopItem.title}
+                    onChange={(e) => setNewTitle(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
                 <Form.Group className="mb-3">
@@ -144,6 +150,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Control
                     type="text"
                     defaultValue={props.shopItem.image}
+                    onChange={(e) => setNewImage(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
               </Form>
