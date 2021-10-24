@@ -61,19 +61,15 @@ export const InventoryItem: FC<IShopItem> = (props) => {
         <Card.Body>
           <Row>
             <Col sm={2}>
-              <Image src={props.shopItem.image} style={{ maxWidth: "12vw" }} />
+              <Image src={newImage} style={{ maxWidth: "12vw" }} />
             </Col>
             <Col sm={10}>
               <ListGroup variant="flush">
-                <ListGroup.Item>ID: {props.shopItem.id}</ListGroup.Item>
-                <ListGroup.Item>
-                  Description: {props.shopItem.description}
-                </ListGroup.Item>
-                <ListGroup.Item>Price: {props.shopItem.price}</ListGroup.Item>
-                <ListGroup.Item>Title: {props.shopItem.title}</ListGroup.Item>
-                <ListGroup.Item>
-                  ImageURL: {props.shopItem.image}
-                </ListGroup.Item>
+                <ListGroup.Item>ID: {newID}</ListGroup.Item>
+                <ListGroup.Item>Description: {newDescription}</ListGroup.Item>
+                <ListGroup.Item>Price: {newPrice}</ListGroup.Item>
+                <ListGroup.Item>Title: {newTitle}</ListGroup.Item>
+                <ListGroup.Item>ImageURL: {newImage}</ListGroup.Item>
               </ListGroup>
             </Col>
           </Row>
@@ -109,7 +105,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
         <Modal.Body>
           <Row>
             <Col>
-              <Image src={props.shopItem.image} style={{ maxWidth: "100%" }} />
+              <Image src={newImage} style={{ maxWidth: "100%" }} />
             </Col>
             <Col>
               <Form>
@@ -117,7 +113,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Label>ID</Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={props.shopItem.id}
+                    defaultValue={newID}
                     onChange={(e) => setNewID(Number(e.target.value))}
                   ></Form.Control>
                 </Form.Group>
@@ -125,7 +121,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Label>Description</Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={props.shopItem.description}
+                    defaultValue={newDescription}
                     onChange={(e) => setNewDescription(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
@@ -133,7 +129,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Label>Price</Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={props.shopItem.price}
+                    defaultValue={newPrice}
                     onChange={(e) => setNewPrice(Number(e.target.value))}
                   ></Form.Control>
                 </Form.Group>
@@ -141,7 +137,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Label>Title</Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={props.shopItem.title}
+                    defaultValue={newTitle}
                     onChange={(e) => setNewTitle(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
@@ -149,7 +145,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                   <Form.Label>Image URL</Form.Label>
                   <Form.Control
                     type="text"
-                    defaultValue={props.shopItem.image}
+                    defaultValue={newImage}
                     onChange={(e) => setNewImage(e.target.value)}
                   ></Form.Control>
                 </Form.Group>
