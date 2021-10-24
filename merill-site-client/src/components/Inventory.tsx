@@ -116,9 +116,18 @@ export const Inventory: FC<IShopItems> = (props) => {
           <Modal.Title>Create New Item</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Row>
-            <Col>
-              <Image src={newImage} style={{ maxWidth: "100%" }} />
+          <Row style={{ height: "100%" }}>
+            <Col
+              style={{
+                textAlign: "center",
+                height: "100%",
+              }}
+            >
+              {newImage == "" ? (
+                "Input Image URL To Render Image"
+              ) : (
+                <Image src={newImage} style={{ maxWidth: "100%" }} />
+              )}
             </Col>
             <Col>
               <Form>
