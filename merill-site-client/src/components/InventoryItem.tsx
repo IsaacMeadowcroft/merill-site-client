@@ -3,6 +3,17 @@ import { IShopItem } from "./interfaces";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Card, Col, Image, ListGroup, Row } from "react-bootstrap";
 
+const sendDeleteRequest = async (id: number) => {
+  const res = await fetch("http://127.0.0.1:8080/deleteShopItem", {
+    method: "POST",
+    body: JSON.stringify({ id: id }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  console.log(res);
+};
+
 export const InventoryItem: FC<IShopItem> = (props) => {
   return (
     <Card style={{ maxWidth: "100vw", marginTop: "3vh" }}>
@@ -27,7 +38,11 @@ export const InventoryItem: FC<IShopItem> = (props) => {
       <Card.Footer>
         <Row>
           <Col>
-            <Button variant="dark" style={{ width: "100%" }}>
+            <Button
+              variant="dark"
+              style={{ width: "100%" }}
+              onClick={() => sendDeleteRequest(props.shopItem.id)}
+            >
               Delete item
             </Button>
           </Col>
