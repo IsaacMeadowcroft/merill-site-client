@@ -90,7 +90,7 @@ export const InventoryItem: FC<IShopItem> = (props) => {
                       setVisibility(false);
                     }}
                   >
-                    Delete item
+                    Delete Item
                   </Button>
                 </Col>
                 <Col>

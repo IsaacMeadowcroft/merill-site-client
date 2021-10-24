@@ -17,12 +17,19 @@ export const Inventory: FC<IShopItems> = (props) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [newID, setNewID] = useState(0);
   const [newImage, setNewImage] = useState("");
   const [newTitle, setNewTitle] = useState("");
   const [newPrice, setNewPrice] = useState(0);
   const [newDescription, setNewDescription] = useState("");
-  const [shopItems, setShopItems] = useState(props.shopItems);
+  const [shopItems, setShopItems] = useState(props.shopItems || []);
+  const [newID, setNewID] = useState(
+    Math.max.apply(
+      Math,
+      shopItems?.map(function (o) {
+        return o.id;
+      })
+    ) + 1
+  );
 
   const sendPostRequest = async () => {
     const res = await fetch("http://127.0.0.1:8080/postShopItem/ADD", {
@@ -72,7 +79,7 @@ export const Inventory: FC<IShopItems> = (props) => {
               style={{ width: "100%" }}
               onClick={handleShow}
             >
-              Create new shop item
+              Create New Shop Item
             </Button>
           </Card.Body>
         </Card>
@@ -87,7 +94,7 @@ export const Inventory: FC<IShopItems> = (props) => {
 
       <Modal show={show} onHide={handleClose} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Create item</Modal.Title>
+          <Modal.Title>Create New Item</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
