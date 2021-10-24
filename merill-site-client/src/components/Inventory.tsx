@@ -22,6 +22,7 @@ export const Inventory: FC<IShopItems> = (props) => {
   const [newTitle, setNewTitle] = useState("");
   const [newPrice, setNewPrice] = useState(0);
   const [newDescription, setNewDescription] = useState("");
+  const [shopItems, setShopItems] = useState(props.shopItems);
 
   const sendPostRequest = async () => {
     const res = await fetch("http://127.0.0.1:8080/postShopItem/ADD", {
@@ -42,6 +43,18 @@ export const Inventory: FC<IShopItems> = (props) => {
 
   const handlePostRequest = async () => {
     await sendPostRequest();
+    if (shopItems) {
+      setShopItems([
+        ...shopItems,
+        {
+          id: newID,
+          title: newTitle,
+          image: newImage,
+          description: newDescription,
+          price: newPrice,
+        },
+      ]);
+    }
     setNewID(0);
     setNewImage("");
     setNewTitle("");
@@ -63,7 +76,7 @@ export const Inventory: FC<IShopItems> = (props) => {
             </Button>
           </Card.Body>
         </Card>
-        {props.shopItems
+        {shopItems
           ?.sort((a, b) => a.id - b.id)
           .map((shopItem: TShopItem) => (
             <div key={shopItem.id}>
