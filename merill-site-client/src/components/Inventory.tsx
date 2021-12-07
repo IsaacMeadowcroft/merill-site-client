@@ -31,6 +31,10 @@ export const Inventory: FC<IShopItems> = (props) => {
     ) + 1
   );
 
+  if (newID < 0) {
+    setNewID(1);
+  }
+
   const sendPostRequest = async () => {
     const res = await fetch(
       "https://merillbackend.herokuapp.com/postShopItem/ADD",
