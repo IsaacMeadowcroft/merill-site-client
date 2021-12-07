@@ -22,18 +22,35 @@ export const Inventory: FC<IShopItems> = (props) => {
   const [newPrice, setNewPrice] = useState(0);
   const [newDescription, setNewDescription] = useState("");
   const [shopItems, setShopItems] = useState(props.shopItems || []);
-  const [newID, setNewID] = useState(
-    Math.max.apply(
-      Math,
-      shopItems?.map(function (o) {
-        return o.id;
-      })
-    ) + 1
-  );
 
-  if (newID < 0) {
-    setNewID(1);
-  }
+  const getNewID = () => {
+    const missing = [];
+    const items = [];
+    for (let i = 0; i < shopItems.length; i++) {
+      items.push(shopItems[i].id);
+    }
+
+    for (
+      let i = 1;
+      i <=
+      (items.length == 0
+        ? 1
+        : Math.max.apply(
+            Math,
+            shopItems?.map(function (o) {
+              return o.id;
+            })
+          ) + 1);
+      i++
+    ) {
+      if (items.indexOf(i) == -1) {
+        missing.push(i);
+      }
+    }
+    return Math.min.apply(Math, missing);
+  };
+
+  const [newID, setNewID] = useState(getNewID);
 
   const sendPostRequest = async () => {
     const res = await fetch(
@@ -69,7 +86,7 @@ export const Inventory: FC<IShopItems> = (props) => {
         },
       ]);
     }
-    setNewID(newID + 1);
+    setNewID(getNewID);
     setNewImage("");
     setNewTitle("");
     setNewPrice(0);
@@ -82,14 +99,7 @@ export const Inventory: FC<IShopItems> = (props) => {
   };
 
   useEffect(() => {
-    setNewID(
-      Math.max.apply(
-        Math,
-        shopItems?.map(function (o) {
-          return o.id;
-        })
-      ) + 1
-    );
+    setNewID(getNewID);
   }, [shopItems.length]);
 
   return (
