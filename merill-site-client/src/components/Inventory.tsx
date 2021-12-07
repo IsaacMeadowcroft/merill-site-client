@@ -32,19 +32,22 @@ export const Inventory: FC<IShopItems> = (props) => {
   );
 
   const sendPostRequest = async () => {
-    const res = await fetch("http://127.0.0.1:8080/postShopItem/ADD", {
-      method: "POST",
-      body: JSON.stringify({
-        id: newID,
-        title: newTitle,
-        image: newImage,
-        description: newDescription,
-        price: newPrice,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      "https://merillbackend.herokuapp.com/postShopItem/ADD",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: newID,
+          title: newTitle,
+          image: newImage,
+          description: newDescription,
+          price: newPrice,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log(res);
   };
 

@@ -25,33 +25,39 @@ export const InventoryItem: FC<IShopItem> = (props) => {
   );
 
   const sendDeleteRequest = async () => {
-    const res = await fetch("http://127.0.0.1:8080/deleteShopItem", {
-      method: "DELETE",
-      body: JSON.stringify({ id: props.shopItem.id }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = await fetch(
+      "https://merillbackend.herokuapp.com/deleteShopItem",
+      {
+        method: "DELETE",
+        body: JSON.stringify({ id: props.shopItem.id }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     console.log(res);
   };
 
   const sendUpdateRequest = async () => {
-    const res = await fetch("http://127.0.0.1:8080/postShopItem/EDIT", {
-      method: "POST",
-      body: JSON.stringify({
-        id: props.shopItem.id,
-        newItem: {
-          id: newID,
-          title: newTitle,
-          image: newImage,
-          description: newDescription,
-          price: newPrice,
+    const res = await fetch(
+      "https://merillbackend.herokuapp.com/postShopItem/EDIT",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          id: props.shopItem.id,
+          newItem: {
+            id: newID,
+            title: newTitle,
+            image: newImage,
+            description: newDescription,
+            price: newPrice,
+          },
+        }),
+        headers: {
+          "Content-Type": "application/json",
         },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+      }
+    );
     console.log(res);
   };
 
